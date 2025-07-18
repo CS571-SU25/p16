@@ -23,7 +23,7 @@ export default function AboutMe() {
       <Row className="align-items-center g-4">
         <Col xs={12} md={4} className="text-center">
           <Image
-            src="../d.png"
+            src="d.png"
             roundedCircle
             alt="Profile"
             fluid

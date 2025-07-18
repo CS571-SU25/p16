@@ -30,7 +30,7 @@ export default function Home() {
     },
     {
       title: 'Resume',
-      path: '/resume.pdf',
+      path: '/p16/resume.pdf',
       description: 'Download my full resume as a PDF.',
       download: true,
     },
@@ -56,10 +56,9 @@ export default function Home() {
                   <Button
                     variant="primary"
                     href={page.path}
-                    download
                     className="mt-3 align-self-start"
                   >
-                    Download {page.title}
+                    Visit {page.title}
                   </Button>
                 ) : (
                   <Button

@@ -6,7 +6,7 @@ import AboutMe from '../content/AboutMe'
 import Projects from '.././content/Projects'
 import Home from '.././content/Home';
 import Contact from '.././content/Contact'
-import Education from '../content/Education'
+import Education from '.././content/Education'
 import githubLogo from '../../assets/github.svg'
 import linkedinLogo from '../../assets/linkedin.png'
 
@@ -28,7 +28,7 @@ return (
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                 <Nav.Link as={Link} to="/education">Education</Nav.Link>
                 <Nav.Link
-                  href="../../../resume.pdf"
+                  href="resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -20,7 +20,7 @@ export default function Contact() {
   };
 
   return (
-    <Container className="mt-4" style={{ maxWidth: '600px' }}>
+    <Container className="mt-4">
       <h1>Contact Me</h1>
 
       {submitted && (
