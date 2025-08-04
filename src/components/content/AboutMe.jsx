@@ -1,19 +1,13 @@
 import { Container, Row, Col, Image, Card } from 'react-bootstrap';
+import salzburgPic from '../../assets/salzburg.png';
+import budapestPic from '../../assets/budapest.png';
+import parisPic from '../../assets/paris.png';
 
 export default function AboutMe() {
     const travelPics = [
-    {
-      label: 'Budapest',
-      src: '/assets/budpest.jpg',   
-    },
-    {
-      label: 'Salzburg',
-      src: '/assets/salzburg.jpg',   
-    },
-    {
-      label: 'Paris',
-      src: '/assets/paris.jpg',   
-    },
+    {label: "Salzburg", src: salzburgPic},
+    {label: "Budapest", src: budapestPic},
+    {label: "Paris", src: parisPic},
   ];
 
   return (

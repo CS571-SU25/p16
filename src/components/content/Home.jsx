@@ -39,7 +39,7 @@ export default function Home() {
     <Container className="mt-5">
       <h1 className="text-center mb-4">Liming Han</h1>
       <p className="text-center mb-5">
-        Welcome! Use the links below to navigate through my site.
+        Welcome! Use the  navigation bar or links below to navigate through my site.
       </p>
       <Row xs={1} md={2} lg={3} className="g-4 justify-content-center">
         {pages.map((page, idx) => (

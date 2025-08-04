@@ -11,13 +11,31 @@ export default function Contact() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Contact form submitted:', form);
-    // TODO: send to backend or email service
-    setSubmitted(true);
-    // reset form if you like:
-    setForm({ name: '', email: '', message: '' });
-  };
+  e.preventDefault();
+
+  fetch("https://cs571api.cs.wisc.edu/rest/su25/bucket/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CS571-ID": CS571.getBadgerId(),
+    },
+    body: JSON.stringify(form),
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Error in res!!!");
+      }
+      return res.json();
+    })
+    .then(data => {
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
+    })
+    .catch(err => {
+      console.error("Failed to submit message:", err);
+    });
+};
+
 
   return (
     <Container className="mt-4">

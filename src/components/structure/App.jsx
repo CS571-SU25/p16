@@ -1,88 +1,67 @@
-import '../.././App.css'
-import { HashRouter, Route, Routes, Link } from 'react-router'
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import AboutMe from '../content/AboutMe'
-import Projects from '.././content/Projects'
-import Home from '.././content/Home';
-import Contact from '.././content/Contact'
-import Education from '.././content/Education'
-import githubLogo from '../../assets/github.svg'
-import linkedinLogo from '../../assets/linkedin.png'
+import React, { useState, useEffect } from 'react';
+import { HashRouter, Routes, Route } from 'react-router';
+import NavigationBar from '../NavigationBar';
+import Footer from '../Footer';
+import Favorites from '../SavedProjects';
+import Home from '../content/Home';
+import AboutMe from '../content/AboutMe';
+import Projects from '../content/Projects';
+import Contact from '../content/Contact';
+import Education from '../content/Education';
+import { ThemeProvider } from '../context/ThemeContext';
+import ThemeToggle from '../ThemeToggle';
 
 
-function App() {
-  
-return (
-    <HashRouter>
-      <div className="d-flex flex-column min-vh-100">
-        <Navbar bg="light" expand="md">
-          <Container fluid>
-            <Navbar.Brand as={Link} to="/">Liming Han</Navbar.Brand>
-            <Navbar.Toggle aria-controls="main-nav" />
-            <Navbar.Collapse id="main-nav">
-              <Nav className="me-auto">
-                <Nav.Link as={Link} to="/">Home</Nav.Link>
-                <Nav.Link as={Link} to="/about-me">About Me</Nav.Link>
-                <Nav.Link as={Link} to="/projects">Portfolio</Nav.Link>
-                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                <Nav.Link as={Link} to="/education">Education</Nav.Link>
-                <Nav.Link
-                  href="resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Resume
-                </Nav.Link>
-              </Nav>
+export default function App() {  
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const json = localStorage.getItem('favorites');
+      return json ? JSON.parse(json) : [];
+    } catch {
+      return [];
+    }
+  });
+  useEffect(() => {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
-              <Nav>
-                <Nav.Link
-                  href="https://github.com/liminghan1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="d-flex align-items-center"
-                >
-                  <img
-                    src={githubLogo}
-                    alt="GitHub"
-                    width="24"
-                    height="24"
-                    className="me-1"
-                  />
-                  GitHub
-                </Nav.Link>
+  const toggleFavorite = proj => {
+    setFavorites(favs =>
+      favs.some(f => f.id === proj.id)
+        ? favs.filter(f => f.id !== proj.id)
+        : [...favs, proj]
+    );
+  };
 
-                <Nav.Link
-                  href="https://www.linkedin.com/in/YourProfile"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="d-flex align-items-center"
-                >
-                  <img
-                    src={linkedinLogo}
-                    alt="LinkedIn"
-                    width="24"
-                    height="24"
-                    className="me-1"
-                  />
-                  LinkedIn
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+  return (
+    <ThemeProvider>
+      <HashRouter>
+        <NavigationBar>
+          <ThemeToggle />
+        </NavigationBar>
 
-        <Container fluid className="flex-grow-1 py-4">
+        <main className="flex-grow-1 py-4">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about-me" element={<AboutMe />} />
-            <Route path="/projects" element={<Projects />} />
+            <Route
+              path="/projects"
+              element={
+                <Projects
+                  favorites={favorites}
+                  onToggleFavorite={toggleFavorite}
+                />
+              }
+            />
             <Route path="/contact" element={<Contact />} />
-<           Route path="/education" element={<Education />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/favorites" element={<Favorites items={favorites} />} />
+            <Route path="*" element={<h1>404: Page Not Found</h1>} />
           </Routes>
-        </Container>
-      </div>
-    </HashRouter>
-  )
+        </main>
+
+        <Footer />
+      </HashRouter>
+    </ThemeProvider>
+  );
 }
-export default App

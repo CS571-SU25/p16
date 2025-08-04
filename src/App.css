@@ -1,42 +1,48 @@
-#root {
-  max-width: auto;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+/*--- Light theme overrides ---*/
+:root[data-theme='light'] {
+  /* default Bootstrap variables: */
+  --bs-body-bg: #fff;
+  --bs-body-color: #212529;
+
+  /* your dynamic primary accent (will get overridden in JS) */
+  --bs-primary: #0d6efd;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/*--- Dark theme overrides ---*/
+:root[data-theme='dark'] {
+  /* dark background + text */
+  --bs-body-bg: #121212;
+  --bs-body-color: #e0e0e0;
+
+  /* keep the same accent var if you like, but you could set a different default */
+  --bs-primary: #0d6efd;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+/* Optionally override hover states, etc. */
+.btn-primary:hover {
+  opacity: .9
+
+}
+.btn-outline-secondary {
+  color: #495057 !important;
+  border-color: #495057 !important;
+}
+.btn-outline-secondary:hover {
+  color: #343a40 !important;
+  border-color: #343a40 !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+:root[data-theme='dark'] .form-control::placeholder {
+  /* use a semi-opaque white that meets WCAG contrast */
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Optionally, ensure the input text is also light */
+:root[data-theme='dark'] .form-control {
+  background-color: #2c2c2c;    /* or var(--bs-body-bg) */
+  color: #f0f0f0;
+  border-color: #444;
 }
